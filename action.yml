@@ -17,7 +17,7 @@ inputs:
     default: false
 
 runs:
-  using: "composit"
+  using: "composite"
   steps:
     - name: "Install pnpm"
       uses: pnpm/action-setup@v2

@@ -1,4 +1,4 @@
-# `NullVoxPopuli/pnpm-action`
+# `NullVoxPopuli/action-setup-pnpm`
 
 Correctly sets up node, pnpm, and cache for pnpm dependencies so that installation can be as fast as it can be.
 

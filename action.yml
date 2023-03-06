@@ -1,6 +1,8 @@
 name: "Setup node, pnpm, and dependency cache"
 description: "Installs pnpm, uses actions/setup-node for cache, and then runs pnpm install"
 author: NullVoxPopuli
+icon: package
+color: orange
 inputs:
   node-version:
     description: "Override the default node version, or override what is specified in your project's volta config"

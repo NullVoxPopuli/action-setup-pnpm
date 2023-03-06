@@ -10,24 +10,6 @@ steps:
 - uses: NullVoxPopuli/action-setup-pnpm@v1
 ```
 
-## Why?
-
-[`pnpm/action-setup`](https://github.com/pnpm/action-setup/) can install dependencies on its own, but then no cache is used from [`actions/setup-node`](https://github.com/actions/setup-node).
-
-[`actions/setup-node`](https://github.com/actions/setup-node) configures node, (and correctly respects `volta` configurations), cache, etc
-
-To set this up on your own, you would required _three_ manual steps in your workflow config file:
-```yaml 
-steps:
-  # ...
-  - uses: pnpm/action-setup@v2
-    with:
-      version: 7 
-  - uses: actions/setup-node@v3
-    with:
-      cache: 'pnpm'
-  - run: pnpm install 
-```
 
 ## Options
 
@@ -58,4 +40,24 @@ Boolean flag useful for tossing out the lockfile for testing if in-range floatin
 - uses: NullVoxPopuli/action-setup-pnpm@v1
   with:
     no-lockfile: true 
+```
+
+
+## Why?
+
+[`pnpm/action-setup`](https://github.com/pnpm/action-setup/) can install dependencies on its own, but then no cache is used from [`actions/setup-node`](https://github.com/actions/setup-node).
+
+[`actions/setup-node`](https://github.com/actions/setup-node) configures node, (and correctly respects `volta` configurations), cache, etc
+
+To set this up on your own, you would required _three_ manual steps in your workflow config file:
+```yaml 
+steps:
+  # ...
+  - uses: pnpm/action-setup@v2
+    with:
+      version: 7 
+  - uses: actions/setup-node@v3
+    with:
+      cache: 'pnpm'
+  - run: pnpm install 
 ```

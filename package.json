@@ -1,0 +1,10 @@
+{
+	"name": "action-setup-pnpm",
+	"scripts": {
+		"lint": "prettier --check .",
+		"lint:fix": "prettier --write ."
+	},
+	"devDependencies": {
+		"prettier": "^2.8.4"
+	}
+}

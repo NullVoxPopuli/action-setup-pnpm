@@ -4,12 +4,11 @@ Correctly sets up node, pnpm, and cache for pnpm dependencies so that installati
 
 ## Usage:
 
-```yaml 
-steps: 
-- uses: actions/checkout@v3
-- uses: NullVoxPopuli/action-setup-pnpm@v1
+```yaml
+steps:
+  - uses: actions/checkout@v3
+  - uses: NullVoxPopuli/action-setup-pnpm@v1
 ```
-
 
 ## Options
 
@@ -17,7 +16,7 @@ steps:
 
 Allows changing the `node-version` passed to `actions/setup-node`.
 
-```yaml 
+```yaml
 - uses: NullVoxPopuli/action-setup-pnpm@v1
   with:
     node-version: 18
@@ -27,21 +26,21 @@ Allows changing the `node-version` passed to `actions/setup-node`.
 
 Allows changing the `pnpm-version` passed to `pnpm/action-setup`.
 
-```yaml 
+```yaml
 - uses: NullVoxPopuli/action-setup-pnpm@v1
   with:
     pnpm-version: 7.29.0
 ```
+
 ### `no-lockfile`
 
 Boolean flag useful for tossing out the lockfile for testing if in-range floating dependency changes have accidentally broken things.
 
-```yaml 
+```yaml
 - uses: NullVoxPopuli/action-setup-pnpm@v1
   with:
-    no-lockfile: true 
+    no-lockfile: true
 ```
-
 
 ## Why?
 
@@ -50,14 +49,15 @@ Boolean flag useful for tossing out the lockfile for testing if in-range floatin
 [`actions/setup-node`](https://github.com/actions/setup-node) configures node, (and correctly respects `volta` configurations), cache, etc
 
 To set this up on your own, you would required _three_ manual steps in your workflow config file:
-```yaml 
+
+```yaml
 steps:
   # ...
   - uses: pnpm/action-setup@v2
     with:
-      version: 7 
+      version: 7
   - uses: actions/setup-node@v3
     with:
       cache: 'pnpm'
-  - run: pnpm install 
+  - run: pnpm install
 ```

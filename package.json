@@ -3,7 +3,7 @@
 	"scripts": {
 		"lint": "prettier --check .",
 		"lint:fix": "prettier --write .",
-    "format-check": "prettier --check ."
+		"format-check": "prettier --check ."
 	},
 	"devDependencies": {
 		"prettier": "^2.8.4"

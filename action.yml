@@ -1,36 +1,36 @@
-name: "Setup node, pnpm, and dependency cache"
-description: "Installs pnpm, uses actions/setup-node for cache, and then runs pnpm install"
+name: 'Setup node, pnpm, and dependency cache'
+description: 'Installs pnpm, uses actions/setup-node for cache, and then runs pnpm install'
 author: NullVoxPopuli
 branding:
-  icon: "package"
-  color: "orange"
+  icon: 'package'
+  color: 'orange'
 inputs:
   node-version:
     description: "Override the default node version, or override what is specified in your project's volta config"
     required: false
   pnpm-version:
-    description: "Override the default pnpm version, which defaults to the latest 7.x"
-    required: false 
+    description: 'Override the default pnpm version, which defaults to the latest 7.x'
+    required: false
     default: 7
   no-lockfile:
-    description: "When testing with floating dependencies, the lockfile will need to be ignored. Enabling this deletes the lockfile before running pnpm install. This is safe as long as further action steps do not commit the change"
+    description: 'When testing with floating dependencies, the lockfile will need to be ignored. Enabling this deletes the lockfile before running pnpm install. This is safe as long as further action steps do not commit the change'
     required: false
     default: false
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
-    - name: "Install pnpm"
+    - name: 'Install pnpm'
       uses: pnpm/action-setup@v2
       with:
-        version: ${{ inputs.pnpm-version }} 
-    - name: "Setup node and the cache for pnpm"
+        version: ${{ inputs.pnpm-version }}
+    - name: 'Setup node and the cache for pnpm'
       uses: actions/setup-node@v3
       with:
         cache: 'pnpm'
         node-version: ${{ inputs.node-version }}
-    - name: "Install dependencies"
-      shell: "bash"
+    - name: 'Install dependencies'
+      shell: 'bash'
       run: |
         if [[ "${{ inputs.no-lockfile }}" == "true" ]]; then 
           echo "Detected option --no-lockfile. Lockfile will be deleted before install."
@@ -38,5 +38,3 @@ runs:
         fi
 
         pnpm install
-
-

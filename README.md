@@ -12,6 +12,15 @@ steps:
 
 ## Options
 
+While this action is meant to reduce boilerplate,
+you end up having _one_ extra line than optimal if you need to customize anything,
+unless deing inline yaml-object syntax -- example:
+
+```yaml
+- uses: NullVoxPopuli/action-setup-pnpm@v1
+  with: { node-version: 18 }
+```
+
 ### `node-version`
 
 Allows changing the `node-version` passed to `actions/setup-node`.
@@ -30,6 +39,16 @@ Allows changing the `pnpm-version` passed to `pnpm/action-setup`.
 - uses: NullVoxPopuli/action-setup-pnpm@v1
   with:
     pnpm-version: 7.29.0
+```
+
+### `args`
+
+Passes through any args directly to `pnpm install`.
+
+```yaml
+- uses: NullVoxPopuli/action-setup-pnpm@v1
+  with:
+    args: '--ignore-scripts --fix-lockfile'
 ```
 
 ### `no-lockfile`

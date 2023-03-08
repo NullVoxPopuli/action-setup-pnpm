@@ -24,10 +24,14 @@ runs:
   using: 'composite'
   steps:
     - name: 'Install pnpm'
+      # this action aliases the major (via branch) to the latest full version
+      # https://github.com/pnpm/action-setup/branches/all
       uses: pnpm/action-setup@v2
       with:
         version: ${{ inputs.pnpm-version }}
     - name: 'Setup node and the cache for pnpm'
+      # this action aliases the major to the latest full version 
+      # https://github.com/actions/setup-node/tags
       uses: actions/setup-node@v3
       with:
         cache: 'pnpm'

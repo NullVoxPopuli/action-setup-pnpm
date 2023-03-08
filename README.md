@@ -14,7 +14,7 @@ steps:
 
 While this action is meant to reduce boilerplate,
 you end up having _one_ extra line than optimal if you need to customize anything,
-unless deing inline yaml-object syntax -- example:
+unless doing inline yaml-object syntax -- example:
 
 ```yaml
 - uses: NullVoxPopuli/action-setup-pnpm@v1

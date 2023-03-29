@@ -17,7 +17,7 @@ you end up having _one_ extra line than optimal if you need to customize anythin
 unless doing inline yaml-object syntax -- example:
 
 ```yaml
-- uses: NullVoxPopuli/action-setup-pnpm@v1
+- uses: NullVoxPopuli/action-setup-pnpm@v2
   with: { node-version: 18 }
 ```
 
@@ -26,7 +26,7 @@ unless doing inline yaml-object syntax -- example:
 Allows changing the `node-version` passed to `actions/setup-node`.
 
 ```yaml
-- uses: NullVoxPopuli/action-setup-pnpm@v1
+- uses: NullVoxPopuli/action-setup-pnpm@v2
   with:
     node-version: 18
 ```
@@ -46,7 +46,7 @@ Allows changing the `pnpm-version` passed to `pnpm/action-setup`.
 Passes through any args directly to `pnpm install`.
 
 ```yaml
-- uses: NullVoxPopuli/action-setup-pnpm@v1
+- uses: NullVoxPopuli/action-setup-pnpm@v2
   with:
     args: '--ignore-scripts --fix-lockfile'
 ```
@@ -56,7 +56,7 @@ Passes through any args directly to `pnpm install`.
 Boolean flag useful for tossing out the lockfile for testing if in-range floating dependency changes have accidentally broken things.
 
 ```yaml
-- uses: NullVoxPopuli/action-setup-pnpm@v1
+- uses: NullVoxPopuli/action-setup-pnpm@v2
   with:
     no-lockfile: true
 ```
@@ -74,7 +74,7 @@ steps:
   # ...
   - uses: pnpm/action-setup@v2
     with:
-      version: 7
+      version: 8
   - uses: actions/setup-node@v3
     with:
       cache: 'pnpm'

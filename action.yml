@@ -36,12 +36,15 @@ runs:
       with:
         cache: 'pnpm'
         node-version: ${{ inputs.node-version }}
+      env:
+        VOLTA_FEATURE_PNPM: 1
     - name: 'Install dependencies'
       shell: 'bash'
+      env:
+        VOLTA_FEATURE_PNPM: 1  
       run: |
         if [[ "${{ inputs.no-lockfile }}" == "true" ]]; then 
           echo "Detected option --no-lockfile. Lockfile will be deleted before install."
           rm -f pnpm-lock.yaml
         fi
-
         pnpm install ${{ inputs.args }}

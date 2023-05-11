@@ -36,6 +36,9 @@ runs:
       with:
         cache: 'pnpm'
         node-version: ${{ inputs.node-version }}
+    - uses: volta-cli/action@v4
+      with:
+        node-version: ${{ inputs.node-version }}
       env:
         VOLTA_FEATURE_PNPM: 1
     - name: 'Install dependencies'

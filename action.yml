@@ -91,7 +91,7 @@ runs:
         echo "--"
         echo "Resolved pnpm @ $__resolved_version__"
 
-        echo "version=$__resolved_version__\n"  >> $GITHUB_OUTPUT
+        echo "version=$__resolved_version__"  >> $GITHUB_OUTPUT
 
 
     - name: 'Install pnpm'

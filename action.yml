@@ -11,7 +11,6 @@ inputs:
   pnpm-version:
     description: 'Override the default pnpm version, which defaults to the latest 8.x'
     required: false
-    default: 8
   no-lockfile:
     description: 'When testing with floating dependencies, the lockfile will need to be ignored. Enabling this deletes the lockfile before running pnpm install. This is safe as long as further action steps do not commit the change'
     required: false
@@ -23,12 +22,78 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: 'Determine pnpm version'
+      id: resolved-pnpm
+      shell: 'bash'
+      # Precedence: Most important first
+      #   1. inputs.pnpm-version
+      #   2. package.json#volta.pnpm
+      #   3. package.json#packageManager
+      #   4. default pnpm version (^8.0.0)
+      run: |
+        if [ ! -f "package.json" ]; then 
+          echo "Could not find package.json. Did actions/checkout run?"
+          exit 1
+        fi
+
+        forcedVersion="${{inputs.pnpm-version}}"
+        packageJson=$(cat package.json)
+        packageManage=$(echo $packageJson | jq '.packageManager')
+        voltaPnpm=$(echo $packageJson | jq '.volta.pnpm')
+
+
+        # test here: https://replit.com/@NullVoxPopuli1/if-conditions#main.sh
+        __resolved_version__=""
+
+        function determineVersion() {
+          if [ "$forcedVersion" != "" ]; then
+            echo "Using inputs.pnpm-version"
+            __resolved_version__="$forcedVersion"
+            return
+          else 
+            echo "No pnpm-version override detected"
+          fi
+
+          if [ "$voltaPnpm" != "" ]; then
+            echo "Using package.json#volta.pnpm"
+            __resolved_version__="$voltaPnpm"
+            return
+          else 
+            echo "package.json#volta.pnpm was not defined"
+          fi
+
+          if [[ "$packageManager" =~ ^"pnpm" ]]; then
+            version=$(echo $packageManager | cut -d "@" -f2)
+            
+            if [[ "$version" != "" && "$version" != "$packageManager" ]]; then 
+              echo "Using package.json#packageManager"
+              __resolved_version__="$version"
+              return
+            else 
+              echo "package.json#packageManager ($packageManager) did not specify a version"
+            fi
+          else
+            echo "package.json#packageManager ($packageManager) did not start with 'pnpm' or was not defined."
+          fi
+
+          # default 
+          __resolved_version__="8"
+        }
+
+        determineVersion
+
+        echo "--"
+        echo "Resolved pnpm @ $__resolved_version__"
+
+        echo "version=$__resolved_version__\n"  >> $GITHUB_OUTPUT
+
+
     - name: 'Install pnpm'
       # this action aliases the major (via branch) to the latest full version
       # https://github.com/pnpm/action-setup/branches/all
       uses: pnpm/action-setup@v2
       with:
-        version: ${{ inputs.pnpm-version }}
+        version: ${{ steps.resolved-pnpm.outputs.version }}
     - name: 'Setup node and the cache for pnpm'
       # this action aliases the major to the latest full version 
       # https://github.com/actions/setup-node/tags

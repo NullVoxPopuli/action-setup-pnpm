@@ -38,9 +38,14 @@ runs:
 
         forcedVersion="${{inputs.pnpm-version}}"
         packageJson=$(cat package.json)
-        packageManage=$(echo $packageJson | jq '.packageManager' | tr -dc '[:print:]' )
+        packageManager=$(echo $packageJson | jq '.packageManager' | tr -dc '[:print:]' )
         voltaPnpm=$(echo $packageJson | jq '.volta.pnpm' | tr -dc '[:print:]' )
 
+        echo "--- Debug ---"
+        echo "inputs.pnpm-version: $forcedVersion"
+        echo "packageManager: $packageManager"
+        echo "volta.pnpm: $voltaPnpm"
+        echo "--- ----- ---"
 
         # test here: https://replit.com/@NullVoxPopuli1/if-conditions#main.sh
         __resolved_version__=""

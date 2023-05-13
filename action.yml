@@ -38,8 +38,8 @@ runs:
 
         forcedVersion="${{inputs.pnpm-version}}"
         packageJson=$(cat package.json)
-        packageManage=$(echo $packageJson | jq '.packageManager')
-        voltaPnpm=$(echo $packageJson | jq '.volta.pnpm')
+        packageManage=$(echo $packageJson | jq '.packageManager' | tr -dc '[:print:]' )
+        voltaPnpm=$(echo $packageJson | jq '.volta.pnpm' | tr -dc '[:print:]' )
 
 
         # test here: https://replit.com/@NullVoxPopuli1/if-conditions#main.sh

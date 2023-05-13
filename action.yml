@@ -36,7 +36,7 @@ runs:
           exit 1
         fi
 
-        forcedVersion="${{inputs.pnpm-version}}"
+        forcedVersion=${{inputs.pnpm-version}}
         packageJson=$(cat package.json)
         # when using jq, we trim extra invisibles, and then remove "null" from the output
         packageManager=$(echo $packageJson | jq '.packageManager' | tr -dc '[:print:]' | sed "s/null//g" )
@@ -54,7 +54,7 @@ runs:
         function determineVersion() {
           if [ "$forcedVersion" != "" ]; then
             echo "Using inputs.pnpm-version"
-            __resolved_version__="$forcedVersion"
+            __resolved_version__=$forcedVersion
             return
           else 
             echo "No pnpm-version override detected"
@@ -62,7 +62,7 @@ runs:
 
           if [ "$voltaPnpm" != "" ]; then
             echo "Using package.json#volta.pnpm"
-            __resolved_version__="$voltaPnpm"
+            __resolved_version__=$voltaPnpm
             return
           else 
             echo "package.json#volta.pnpm was not defined"
@@ -73,7 +73,7 @@ runs:
             
             if [[ "$version" != "" && "$version" != "$packageManager" ]]; then 
               echo "Using package.json#packageManager"
-              __resolved_version__="$version"
+              __resolved_version__=$version
               return
             else 
               echo "package.json#packageManager ($packageManager) did not specify a version"
@@ -83,7 +83,7 @@ runs:
           fi
 
           # default 
-          __resolved_version__="8"
+          __resolved_version__=8
         }
 
         determineVersion

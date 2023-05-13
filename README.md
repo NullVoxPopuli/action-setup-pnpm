@@ -7,8 +7,15 @@ Correctly sets up node, pnpm, and cache for pnpm dependencies so that installati
 ```yaml
 steps:
   - uses: actions/checkout@v3
-  - uses: NullVoxPopuli/action-setup-pnpm@v1
+  - uses: NullVoxPopuli/action-setup-pnpm@v2
 ```
+
+## Support:
+
+- dependency cache
+- pnpm only
+  - choose `pnpm` version via `package.json#packageManager` or `package.json#volta.pnpm`
+  - pass any args
 
 ## Options
 

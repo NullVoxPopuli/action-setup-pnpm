@@ -38,6 +38,16 @@ Allows changing the `node-version` passed to `actions/setup-node`.
     node-version: 18
 ```
 
+### `node-registry-url`
+
+Allows changing the `registry-url` passed to `actions/setup-node`.
+
+```yaml
+- uses: NullVoxPopuli/action-setup-pnpm@v2
+  with:
+    node-registry-url: "https://registry.npmjs.org"
+```
+
 ### `pnpm-version`
 
 Allows changing the `pnpm-version` passed to `pnpm/action-setup`.

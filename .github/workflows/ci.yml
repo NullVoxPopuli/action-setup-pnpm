@@ -22,5 +22,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./
         with:
+          args: '--ignore-scripts --fix-lockfile'
           node-version: ${{ matrix.node }}
       - run: pnpm lint:fix

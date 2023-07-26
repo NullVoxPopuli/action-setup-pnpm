@@ -1,3 +1,7 @@
+Moved to https://github.com/wyvox/action-setup-pnpm so that more folks have access.
+
+---
+
 # `NullVoxPopuli/action-setup-pnpm`
 
 Correctly sets up node, pnpm, and cache for pnpm dependencies so that installation can be as fast as it can be.

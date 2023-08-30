@@ -1,5 +1,5 @@
-name: 'Setup node, pnpm, and dependency cache'
-description: 'Installs pnpm, uses actions/setup-node for cache, and then runs pnpm install'
+name: 'Setup node, pnpm, and dependency cache (original)'
+description: 'Installs pnpm, uses actions/setup-node for cache, and then runs pnpm install. Moved to wyvox/action-setup-pnpm'
 author: NullVoxPopuli
 branding:
   icon: 'package'
